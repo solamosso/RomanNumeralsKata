@@ -53,8 +53,8 @@ namespace RomanNumeralsKata
         [Test]
         public void should_return_roman_number_8_when_arabic_number_is_8()
         {
-            var actual = _romanNumerals.ConvertToRoman(8);
-            Check.That(actual).IsEqualTo("VIII");
+            var computed = _romanNumerals.ConvertToRoman(8);
+            Check.That(computed).IsEqualTo("VIII");
         }
 
         [TestCase(9, "IX")]
