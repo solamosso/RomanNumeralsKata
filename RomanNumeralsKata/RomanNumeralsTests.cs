@@ -65,15 +65,15 @@ namespace RomanNumeralsKata
         [TestCase(90, "XC")]
         [TestCase(100, "C")]
         [TestCase(500, "D")]
-        [TestCase(599, "DLXXXXVIIII")]// Anomalie a corriger
+        [TestCase(599, "DLXXXXVIIII")]
         [TestCase(900, "CM")]
         [TestCase(990, "XM")]
         [TestCase(999, "IM")]
         [TestCase(3000, "MMM")]
         public void should_return_roman_number_when_input_is_arabic_number(int arabicNumber, string romanNumber)
         {
-            var actual = _romanNumerals.ConvertToRoman(arabicNumber);
-            Check.That(actual).IsEqualTo(romanNumber);
+            var computed = _romanNumerals.ConvertToRoman(arabicNumber);
+            Check.That(computed).IsEqualTo(romanNumber);
         }
 
         [TestCase(3500, "Arabic nnumber must be greater than 0 and less than 3000")]
