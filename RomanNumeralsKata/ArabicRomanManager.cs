@@ -29,10 +29,10 @@ namespace RomanNumeralsKata
             int arabicNumber = 0;
             int latestValue = 0;
 
-            for (int i = 0; i < romanNumber.Length; i++)
+            for (var i = 0; i < romanNumber.Length; i++)
             {
                 var c = romanNumber[i];
-                var currentValue = 0;
+                int currentValue;
                 if (Symbols.ContainsKey(c.ToString()))
                 {
                     currentValue = Symbols[c.ToString()];
@@ -64,11 +64,11 @@ namespace RomanNumeralsKata
         int? NearestSymbolValueGreaterThanInput(int input)
         {
             var greatersValues = Symbols.Values.OrderBy(x => x).Where(x => x > input);
-            var enumerable = greatersValues as int[] ?? greatersValues.ToArray();
-            if (!enumerable.Any())
+            var greatersValuesArray = greatersValues as int[] ?? greatersValues.ToArray();
+            if (!greatersValuesArray.Any())
                 return null;
 
-            return enumerable.First();
+            return greatersValuesArray.First();
         }
         private string ConvertArabicNumberToRomanNumberSimpleMethod(int arabicNumber)
         {

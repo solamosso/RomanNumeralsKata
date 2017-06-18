@@ -1,4 +1,5 @@
-﻿using NFluent;
+﻿using System;
+using NFluent;
 using NUnit.Framework;
 
 namespace RomanNumeralsKata
@@ -66,11 +67,19 @@ namespace RomanNumeralsKata
         [TestCase("MCL", 1150)]
         public void should_retun_arabic_number_when_input_is_roman_number(string romanNumber, int arabicNumber)
         {
-            var actual = _arabicNumerals.ConvertToArabic(romanNumber);
-            Check.That(actual).IsEqualTo(arabicNumber);
+            var computed = _arabicNumerals.ConvertToArabic(romanNumber);
+            Check.That(computed).IsEqualTo(arabicNumber);
+            Check.That(computed).IsInstanceOf<int>();
+            Check.ThatCode(() => _arabicNumerals.ConvertToArabic(romanNumber)).LastsLessThan(1, TimeUnit.Milliseconds);
         }
 
-
+        [TestCase("MSX", "The roman number MSX contains invalid roman character 'S'")]
+        [TestCase("MLW", "The roman number MLW contains invalid roman character 'W'")]
+        public void should_return_return_exception_when_invalid_input(string romanNumber, string exceptionMassage)
+        {
+            Check.ThatCode(() => _arabicNumerals.ConvertToArabic(romanNumber)).Throws<Exception>().WithMessage(exceptionMassage);
+            Check.ThatCode(() => _arabicNumerals.ConvertToArabic(romanNumber)).LastsLessThan(1, TimeUnit.Milliseconds);
+        }
     }
 
 }

@@ -74,6 +74,8 @@ namespace RomanNumeralsKata
         {
             var computed = _romanNumerals.ConvertToRoman(arabicNumber);
             Check.That(computed).IsEqualTo(romanNumber);
+            Check.That(computed).IsInstanceOf<string>();
+            Check.ThatCode(() => _romanNumerals.ConvertToRoman(arabicNumber)).LastsLessThan(1, TimeUnit.Milliseconds);
         }
 
         [TestCase(3500, "Arabic nnumber must be greater than 0 and less than 3000")]
@@ -81,6 +83,7 @@ namespace RomanNumeralsKata
         public void should_return_exception_when_input_is_arabic_number_is_inferior_to_0_or_superior_to_3000(int arabicNumber, string expected)
         {
             Check.ThatCode(() => _romanNumerals.ConvertToRoman(arabicNumber)).Throws<Exception>().WithMessage(expected);
+            Check.ThatCode(() => _romanNumerals.ConvertToRoman(arabicNumber)).LastsLessThan(1, TimeUnit.Milliseconds);
         }
     }
 }
